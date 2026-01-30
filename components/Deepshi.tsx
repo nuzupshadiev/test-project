@@ -12,7 +12,6 @@ export default function GlassMain() {
       </div>
 
       <div className="relative z-10 flex w-full">
-        {/* Evermind Labs Branding */}
         <div className="absolute left-10 top-10 flex flex-col items-start text-zinc-300/80">
           <div className="flex items-center gap-2">
             <div className="flex flex-col gap-1 font-mono">
@@ -47,9 +46,7 @@ export default function GlassMain() {
 
           <div className="relative z-10 flex flex-col items-center w-full">
             <div className="flex items-center gap-0 mb-8 scale-110">
-              <div className="bg-[#a8a2f8] p-2 rounded-xl text-black">
-                ☁
-              </div>
+              <div className="bg-[#a8a2f8] p-2 rounded-xl text-black">☁</div>
               <div className="bg-[#8b85f0] px-4 py-2 rounded-lg font-mono font-bold text-sm tracking-widest text-white">
                 DEEPSHI
               </div>
