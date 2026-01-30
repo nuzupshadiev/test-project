@@ -48,11 +48,11 @@ export default function CommandInput() {
   };
 
   return (
-    <div className="flex w-full flex-col items-center bg-[#050505]">
-      <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.55)] backdrop-blur-md">
+    <div className="flex w-full min-w-0 flex-col items-center bg-[#050505]">
+      <div className="relative w-full min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.55)] backdrop-blur-md">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-b from-white/20 to-transparent opacity-40" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-white/15 to-transparent opacity-30" />
-        <div className="flex flex-col gap-6 rounded-2xl bg-linear-to-b from-white/10 to-white/5 p-5">
+        <div className="flex min-w-0 flex-col gap-6 rounded-sm rounded-b-[46px] bg-linear-to-b from-white/10 to-white/5 p-5">
           <textarea
             ref={textareaRef}
             placeholder="Type something…"
@@ -154,7 +154,7 @@ export default function CommandInput() {
                 {selectedItems.map((item) => (
                   <div
                     key={item}
-                    className="flex shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm uppercase tracking-[0.2em] text-zinc-300 shadow-inner"
+                    className="flex shrink-0 items-center gap-2.5 rounded-full border border-white/15 bg-linear-to-b from-white/10 to-white/5 px-4 py-1.5 text-[11px] font-mono uppercase tracking-[0.32em] text-zinc-200 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06),0_10px_24px_rgba(0,0,0,0.35)]"
                   >
                     <span>{item}</span>
                     <button

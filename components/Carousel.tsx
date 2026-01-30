@@ -49,17 +49,23 @@ export default function SlideScale() {
             const isActive = index === current;
 
             return (
-              <CarouselItem key={slide.title} className="basis-[72%]">
+              <CarouselItem
+                key={slide.title}
+                className={cn(
+                  "basis-[72%] relative",
+                  isActive ? "z-10" : "z-0"
+                )}
+              >
                 <Card
-                  className="relative aspect-16/10 transition-all duration-500 border-white/10 bg-zinc-900/60 backdrop-blur-xl"
+                  className="relative aspect-16/10 transition-all duration-500 border-white/10 bg-zinc-900/60 backdrop-blur-xl p-0 m-0 gap-0"
                   style={{
                     transform: `scale(${getScale(index)})`,
                     opacity: isActive ? 1 : 0.45,
                     filter: isActive ? "brightness(1)" : "brightness(0.8)",
                   }}
                 >
-                  <CardContent className="h-full p-8 flex flex-col justify-between text-white rounded-2xl">
-                    <div>
+                  <CardContent className="relative h-full p-0 m-0 flex flex-col justify-between text-white rounded-2xl">
+                    <div className="p-8">
                       <h3 className="text-2xl md:text-3xl font-medium tracking-tight text-zinc-200">
                         {slide.title}
                       </h3>
@@ -67,14 +73,11 @@ export default function SlideScale() {
                         {slide.subtitle}
                       </p>
                     </div>
-
-                    <div className="mt-auto pt-6">
-                      <div className="h-40 w-full bg-zinc-950/70 rounded-t-2xl border border-white/10 p-4">
-                        <div className="w-20 h-2 bg-white/10 rounded mb-4" />
-                        <div className="w-full h-2 bg-white/5 rounded mb-2" />
-                        <div className="w-3/4 h-2 bg-white/5 rounded" />
+                    {slide.bottomRight && (
+                      <div className="absolute bottom-0 right-0">
+                        {slide.bottomRight}
                       </div>
-                    </div>
+                    )}
                   </CardContent>
 
                   {isActive && (
