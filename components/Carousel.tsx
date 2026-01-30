@@ -74,7 +74,7 @@ export default function SlideScale() {
                       </p>
                     </div>
                     {slide.bottomRight && (
-                      <div className="absolute bottom-0 right-0">
+                      <div className="absolute bottom-0 right-0 w-[60%] md:w-[55%] lg:w-[50%] max-w-[560px]">
                         {slide.bottomRight}
                       </div>
                     )}

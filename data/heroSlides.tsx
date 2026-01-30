@@ -26,7 +26,8 @@ const previewImage = (
     alt="Deepshi UI preview"
     width={320}
     height={200}
-    className="h-76 w-106 object-cover"
+    className="h-auto w-full object-cover"
+    sizes="(max-width: 768px) 60vw, (max-width: 1024px) 55vw, 560px"
   />
 );
 
