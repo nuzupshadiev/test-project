@@ -1,4 +1,5 @@
 "use client";
+
 import {
   ArrowUp,
   Code,
@@ -10,13 +11,9 @@ import {
   Video,
 } from "lucide-react";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import BubbleWithClose from "./bubble";
 import texture from "@/data/texture.png";
 
@@ -38,32 +35,47 @@ export default function CommandInput() {
   const selectedItemsRef = useRef<HTMLDivElement | null>(null);
   const isDraggingRef = useRef(false);
   const lastClientXRef = useRef(0);
+
   const availableItems = MENU_ITEMS.filter(
     (item) => !selectedItems.includes(item.label)
   );
 
   const adjustTextareaHeight = (element: HTMLTextAreaElement) => {
     const computed = window.getComputedStyle(element);
-    const lineHeight = Number.parseFloat(computed.lineHeight || "0");
+    const rawLineHeight = Number.parseFloat(computed.lineHeight || "0");
+    const fallbackLineHeight =
+      Number.parseFloat(computed.fontSize || "16") * 1.5;
+    const lineHeight = Number.isFinite(rawLineHeight)
+      ? rawLineHeight
+      : fallbackLineHeight;
+
     const maxLines = 5;
-    const maxHeight =
-      lineHeight > 0 ? lineHeight * maxLines : element.scrollHeight;
+    const maxHeight = lineHeight > 0 ? lineHeight * maxLines : element.scrollHeight;
 
     element.style.height = "auto";
     element.style.height = `${Math.min(element.scrollHeight, maxHeight)}px`;
   };
+
   const handleInputChange = (value: string) => {
     setInputValue(value);
+  };
+
+  useEffect(() => {
     if (textareaRef.current) {
       adjustTextareaHeight(textareaRef.current);
     }
-  };
+  }, [inputValue]);
 
   return (
-    <div className="flex min-w-0 flex-col items-center  w-[555px] h-[192px]">
+    <div className="flex min-w-0 flex-col items-center w-[555px] min-h-[192px] h-auto">
       <div
-        className="relative min-w-0 overflow-hidden w-full h-full flex items-center justify-center"
+        // GROWS UP: anchor children to bottom + keep constant padding around them
+        className="relative min-w-0 overflow-hidden w-full min-h-[192px] h-auto flex items-end justify-center"
         style={{
+          paddingTop: "20px",
+          paddingBottom: "20px",
+          paddingLeft: "20px",
+          paddingRight: "20px",
           top: "2px",
           left: "0.5px",
           opacity: 1,
@@ -87,9 +99,9 @@ export default function CommandInput() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-12 bg-linear-to-t from-white/15 to-transparent opacity-30" />
 
         <div
-          className="z-10 flex min-w-0 flex-col justify-end min-h-0 mx-auto"
+          // Card grows with textarea; because parent is items-end, growth goes upward
+          className="z-10 flex min-w-0 flex-col w-[496px]"
           style={{
-            width: "496px",
             opacity: 1,
             borderTopLeftRadius: "5px",
             borderTopRightRadius: "5px",
@@ -99,7 +111,7 @@ export default function CommandInput() {
             borderStyle: "solid",
             borderColor: "transparent",
             padding: "20px",
-            gap: "37px",
+            gap: "14px",
             background:
               "linear-gradient(179.34deg, rgba(255, 255, 255, 0.18) 0.57%, rgba(255, 255, 255, 0.08) 154.9%)",
             borderImageSource:
@@ -113,10 +125,11 @@ export default function CommandInput() {
           <textarea
             ref={textareaRef}
             placeholder="Type something…"
-            rows={1}
-            className="min-h-0 w-full flex-1 resize-none border-0 bg-transparent text-base text-zinc-300 shadow-none placeholder:text-zinc-500 focus-visible:outline-none"
+            rows={2}
+            className="w-full resize-none border-0 bg-transparent text-base leading-6 text-zinc-300 shadow-none placeholder:text-zinc-500 focus-visible:outline-none overflow-y-auto"
             value={inputValue}
             onChange={(event) => handleInputChange(event.target.value)}
+            onInput={(event) => adjustTextareaHeight(event.currentTarget)}
           />
 
           <div className="flex items-center justify-between gap-4">
@@ -126,7 +139,7 @@ export default function CommandInput() {
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="w-[38.9922px] h-[38.9922px] rounded-full opacity-100 text-white hover:text-white"
+                    className="w-[38.9922px] h-[38.9922px] rounded-full opacity-100 text-white hover:text-white shrink-0"
                     style={{
                       background:
                         "linear-gradient(180deg, rgba(44, 47, 52, 0.01) 0%, rgba(40, 43, 48, 0.01) 100%)",
@@ -171,15 +184,12 @@ export default function CommandInput() {
                     </svg>
                   </Button>
                 </PopoverTrigger>
+
                 <PopoverContent
                   side="top"
                   align="start"
                   sideOffset={6}
                   className="w-[204px] gap-2 rounded-[10px] border-[0.5px] border-white/10 bg-[#FFFFFF0F] p-2 text-zinc-100 backdrop-blur-[15px]"
-                  style={{
-                    top: "1303px",
-                    left: "82px",
-                  }}
                 >
                   <div className="flex flex-col gap-1">
                     {availableItems.map((item) => (
@@ -196,6 +206,7 @@ export default function CommandInput() {
                         {item.label}
                       </Button>
                     ))}
+
                     {availableItems.length === 0 && (
                       <div className="px-3 py-2 text-sm text-zinc-500">
                         No more actions
@@ -211,24 +222,30 @@ export default function CommandInput() {
                   if (selectedItems.length === 0) return;
                   if (event.button !== 0) return;
                   if ((event.target as HTMLElement).closest("button")) return;
+
                   const container = selectedItemsRef.current;
                   if (!container) return;
+
                   isDraggingRef.current = true;
                   lastClientXRef.current = event.clientX;
                   container.setPointerCapture(event.pointerId);
                 }}
                 onPointerMove={(event) => {
                   if (selectedItems.length === 0) return;
+
                   const container = selectedItemsRef.current;
                   if (!container || !isDraggingRef.current) return;
+
                   const deltaX = event.clientX - lastClientXRef.current;
                   container.scrollLeft -= deltaX;
                   lastClientXRef.current = event.clientX;
                 }}
                 onPointerUp={(event) => {
                   if (selectedItems.length === 0) return;
+
                   const container = selectedItemsRef.current;
                   if (!container) return;
+
                   isDraggingRef.current = false;
                   container.releasePointerCapture(event.pointerId);
                 }}
@@ -238,16 +255,16 @@ export default function CommandInput() {
                 }}
                 onWheel={(event) => {
                   if (selectedItems.length === 0) return;
+
                   const container = selectedItemsRef.current;
                   if (!container) return;
+
                   if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
                     container.scrollLeft += event.deltaY;
                   }
                 }}
                 className={`flex min-h-12 min-w-0 flex-1 flex-nowrap items-center gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
-                  selectedItems.length > 0
-                    ? "cursor-grab active:cursor-grabbing"
-                    : ""
+                  selectedItems.length > 0 ? "cursor-grab active:cursor-grabbing" : ""
                 }`}
               >
                 {selectedItems.map((item) => (
@@ -267,7 +284,7 @@ export default function CommandInput() {
             <Button
               size="icon"
               variant="ghost"
-              className="w-[40px] h-[40px] p-[3px] rounded-full opacity-100 flex items-center justify-center"
+              className="w-[40px] h-[40px] p-[3px] rounded-full opacity-100 flex items-center justify-center shrink-0"
               style={{
                 background: `conic-gradient(
                   from 269.2deg at 50.98% 49.02%,
