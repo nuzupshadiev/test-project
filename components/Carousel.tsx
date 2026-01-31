@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
+import GradientBox from "@/components/gradient";
 import {
   Carousel,
   type CarouselApi,
@@ -88,17 +89,18 @@ export default function SlideScale() {
                           "0px 19px 41px 0px #0000001A, 0px 75px 75px 0px #00000017, 0px 169px 101px 0px #0000000D, 0px 300px 120px 0px #00000003",
                       }}
                     >
-                    <div className="absolute top-5 left-5 w-[307px] h-[44px] font-['Geist'] text-[16px] leading-[1.4] font-normal tracking-[0] text-[#B0B0B0]">
-                      <h3>{slide.title}</h3>
-                      <p>{slide.subtitle}</p>
-                    </div>
-                      {slide.bottomRight && (
-                       <div className="absolute bottom-0 right-0 w-[92%] max-w-none translate-x-4 translate-y-4 rotate-[-8deg] origin-bottom-right sm:w-[80%] sm:max-w-[560px] sm:translate-x-6 sm:translate-y-6 md:w-[72%] md:max-w-[600px] md:translate-x-8 md:translate-y-8 lg:w-[65%] lg:max-w-[640px]">
-                        <div className="rounded-xl overflow-hidden shadow-2xl">
-                          {slide.bottomRight}
-                        </div>
+                      <div className="absolute top-5 left-5 w-[307px] h-[44px] font-['Geist'] text-[16px] leading-[1.4] font-normal tracking-[0] text-[#B0B0B0]">
+                        <h3>{slide.title}</h3>
+                        <p>{slide.subtitle}</p>
                       </div>
-                    )}
+                      {slide.bottomRight && (
+                        <div className="absolute bottom-0 right-0 w-[92%] max-w-none translate-x-4 translate-y-4 rotate-[-8deg] origin-bottom-right sm:w-[80%] sm:max-w-[560px] sm:translate-x-6 sm:translate-y-6 md:w-[72%] md:max-w-[600px] md:translate-x-8 md:translate-y-8 lg:w-[65%] lg:max-w-[640px]">
+                          <GradientBox className="absolute -inset-6 rounded-xl blur-3xl opacity-90 pointer-events-none" />
+                          <div className="relative rounded-xl overflow-hidden shadow-2xl z-10">
+                            {slide.bottomRight}
+                          </div>
+                        </div>
+                      )}
                     </CardContent>
 
                     {isActive && (
@@ -132,9 +134,7 @@ export default function SlideScale() {
             onClick={() => api?.scrollTo(index)}
             className={cn(
               "h-1 w-1 rounded-full transition-all cursor-pointer bg-white/35",
-              index === current
-                ? "w-4 bg-white"
-                : "hover:bg-white/50"
+              index === current ? "w-4 bg-white" : "hover:bg-white/50"
             )}
             type="button"
             aria-label={`Go to slide ${index + 1}`}

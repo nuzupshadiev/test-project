@@ -9,6 +9,7 @@ import {
   User,
   Video,
 } from "lucide-react";
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import BubbleWithClose from "./bubble";
+import texture from "@/data/texture.png";
 
 const MENU_ITEMS = [
   { icon: <Search size={18} />, label: "Deep Research" },
@@ -58,16 +60,61 @@ export default function CommandInput() {
   };
 
   return (
-    <div className="flex min-w-0 flex-col items-center bg-[#050505] w-[555px] h-[192px]">
-      <div className="relative w-full h-full min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.55)] backdrop-blur-md">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-b from-white/20 to-transparent opacity-40" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-white/15 to-transparent opacity-30" />
-        <div className="flex h-full min-w-0 flex-col justify-end gap-6 rounded-md rounded-b-[35px] border border-white/10 bg-linear-to-b from-white/10 to-white/5 p-5">
+    <div className="flex min-w-0 flex-col items-center  w-[555px] h-[192px]">
+      <div
+        className="relative min-w-0 overflow-hidden w-full h-full flex items-center justify-center"
+        style={{
+          top: "2px",
+          left: "0.5px",
+          opacity: 1,
+          borderRadius: "4.33px",
+          background:
+            "linear-gradient(0deg, rgba(74, 71, 76, 0.3) 2.15%, rgba(149, 143, 152, 0.3) 4.31%, rgba(197, 198, 201, 0.3) 6.62%, rgba(85, 83, 86, 0.3) 10.16%, rgba(32, 28, 31, 0.3) 17.16%, rgba(49, 47, 50, 0.3) 42.1%, rgba(74, 71, 77, 0.3) 81.81%, rgba(54, 51, 54, 0.3) 91.23%, rgba(88, 88, 88, 0.3) 100%)",
+          boxShadow: "0px 1px 0px 0px #FFFFFF1A inset",
+          transform: "none",
+        }}
+      >
+        <Image
+          src={texture}
+          alt=""
+          fill
+          sizes="100vw"
+          className="pointer-events-none absolute inset-0 z-20 h-full w-full object-cover opacity-100"
+          aria-hidden
+          priority
+        />
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-12 bg-linear-to-b from-white/15 to-transparent opacity-30" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-12 bg-linear-to-t from-white/15 to-transparent opacity-30" />
+
+        <div
+          className="z-10 flex min-w-0 flex-col justify-end min-h-0 mx-auto"
+          style={{
+            width: "496px",
+            opacity: 1,
+            borderTopLeftRadius: "5px",
+            borderTopRightRadius: "5px",
+            borderBottomRightRadius: "35px",
+            borderBottomLeftRadius: "35px",
+            borderWidth: "0.5px",
+            borderStyle: "solid",
+            borderColor: "transparent",
+            padding: "20px",
+            gap: "37px",
+            background:
+              "linear-gradient(179.34deg, rgba(255, 255, 255, 0.18) 0.57%, rgba(255, 255, 255, 0.08) 154.9%)",
+            borderImageSource:
+              "linear-gradient(318.61deg, rgba(255, 255, 255, 0.1) 7.71%, rgba(255, 255, 255, 0.1) 29.6%), radial-gradient(50% 42.81% at 50% 0%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%)",
+            borderImageSlice: 1,
+            backdropFilter: "blur(3px)",
+            boxShadow:
+              "0px 19px 41px 0px #0000001A, 0px 75px 75px 0px #00000017, 0px 169px 101px 0px #0000000D, 0px 300px 120px 0px #00000003",
+          }}
+        >
           <textarea
             ref={textareaRef}
             placeholder="Type something…"
             rows={1}
-            className="max-h-36 w-full resize-none border-0 bg-transparent text-base text-zinc-300 shadow-none placeholder:text-zinc-500 focus-visible:outline-none"
+            className="min-h-0 w-full flex-1 resize-none border-0 bg-transparent text-base text-zinc-300 shadow-none placeholder:text-zinc-500 focus-visible:outline-none"
             value={inputValue}
             onChange={(event) => handleInputChange(event.target.value)}
           />
