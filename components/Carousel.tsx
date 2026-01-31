@@ -103,7 +103,7 @@ export default function SlideScale() {
                         <p>{slide.subtitle}</p>
                       </div>
                       {slide.bottomRight && (
-                        <div className="absolute bottom-0 right-0 w-[120%] max-w-none translate-x-6 translate-y-6 rotate-[-8deg] origin-bottom-right sm:w-[120%] sm:translate-x-8 sm:translate-y-8 md:w-[120%] md:translate-x-10 md:translate-y-10 lg:w-[120%] lg:translate-x-12 lg:translate-y-12">
+                        <div className="absolute bottom-0 right-0 w-[90%] ">
                           {/* <GradientBox className="absolute -inset-6 rounded-xl blur-3xl opacity-90 pointer-events-none" /> */}
                           <div className="relative rounded-xl overflow-hidden shadow-2xl z-10">
                             <Image
