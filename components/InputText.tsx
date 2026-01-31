@@ -69,7 +69,6 @@ export default function CommandInput() {
   return (
     <div className="flex min-w-0 flex-col items-center w-[555px] min-h-[192px] h-auto">
       <div
-        // GROWS UP: anchor children to bottom + keep constant padding around them
         className="relative min-w-0 overflow-hidden w-full min-h-[192px] h-auto flex items-end justify-center"
         style={{
           paddingTop: "20px",
@@ -99,7 +98,6 @@ export default function CommandInput() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-12 bg-linear-to-t from-white/15 to-transparent opacity-30" />
 
         <div
-          // Card grows with textarea; because parent is items-end, growth goes upward
           className="z-10 flex min-w-0 flex-col w-[496px]"
           style={{
             opacity: 1,

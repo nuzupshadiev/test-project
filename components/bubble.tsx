@@ -30,12 +30,10 @@ export default function BubbleWithClose({
           background: "linear-gradient(180deg, #454545 0%, #3B3B3B 100%)",
         }}
       >
-        {/* Label */}
         <span className="text-sm text-[#B0B0B0] whitespace-nowrap">
           {label}
         </span>
 
-        {/* Remove button */}
         <button
           onClick={onClose}
           aria-label="Close"
