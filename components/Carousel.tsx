@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/carousel";
 import { SLIDES } from "@/data/heroSlides";
 import nextIcon from "@/data/next_icon.svg";
+import { CloudIcon } from "lucide-react";
 
 export default function SlideScale() {
   const [api, setApi] = React.useState<CarouselApi | null>(null);
@@ -50,7 +51,17 @@ export default function SlideScale() {
         opts={{ loop: true }}
         setApi={setApi}
       >
-        <CarouselContent className="py-8 items-center">
+        <div className="pointer-events-none absolute left-1/2 top-0 z-20 -translate-x-1/2">
+          <div className="flex items-center">
+            <span className="flex h-[25px] w-[40px] items-center justify-center rounded-[25px] bg-[#9775DE] px-[8px] pt-[7px] pb-[8px] opacity-100">
+              <CloudIcon size={14} color="white" />
+            </span>
+            <span className="flex h-[25px] w-[84px] items-center justify-center rounded-[5px] bg-[#9775DE] px-[8px] pt-[3px] pb-[3px] text-xs font-medium uppercase text-white opacity-100">
+              Deepshi
+            </span>
+          </div>
+        </div>
+        <CarouselContent className="pt-[60px] pb-8 items-center">
           {SLIDES.map((slide, index) => {
             const isActive = index === current;
 
@@ -62,14 +73,15 @@ export default function SlideScale() {
                   isActive ? "z-10" : "z-0"
                 )}
               >
-                <Card
-                  className="relative w-full aspect-video rounded-sm border border-white/10 shadow-none bg-zinc-900/60 backdrop-blur transition-[transform,opacity] duration-500 py-0 gap-0"
-                  style={{
-                    transform: `scale(${getScale(index)})`,
-                    opacity: isActive ? 1 : 0.45,
-                  }}
-                >
-                  <CardContent className="relative h-full p-0 m-0 text-white overflow-hidden">
+                <div className="relative w-full">
+                  <Card
+                    className="relative w-full aspect-video rounded-sm border border-white/10 shadow-none bg-zinc-900/60 backdrop-blur transition-[transform,opacity] duration-500 py-0 gap-0"
+                    style={{
+                      transform: `scale(${getScale(index)})`,
+                      opacity: isActive ? 1 : 0.45,
+                    }}
+                  >
+                    <CardContent className="relative h-full p-0 m-0 text-white overflow-hidden">
                     <div className="absolute top-5 left-5 w-[307px] h-[44px] font-['Geist'] text-[16px] leading-[1.4] font-normal tracking-normal text-[#B0B0B0]">
                       <h3 className="">
                         {slide.title}
@@ -85,25 +97,26 @@ export default function SlideScale() {
                         </div>
                       </div>
                     )}
-                  </CardContent>
+                    </CardContent>
 
-                  {isActive && (
-                    <button
-                      onClick={() => api?.scrollNext()}
-                      className="absolute right-[-20px] top-[33%] -translate-y-1/2 z-20 h-10 w-10 rounded-sm bg-white text-black shadow-md flex items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer"
-                      type="button"
-                      aria-label="Next slide"
-                    >
-                      <Image
-                        src={nextIcon}
-                        alt=""
-                        width={20}
-                        height={13}
-                        className="h-[13px] w-[20px]"
-                      />
-                    </button>
-                  )}
-                </Card>
+                    {isActive && (
+                      <button
+                        onClick={() => api?.scrollNext()}
+                        className="absolute right-[-20px] top-[33%] -translate-y-1/2 z-20 h-10 w-10 rounded-sm bg-white text-black shadow-md flex items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+                        type="button"
+                        aria-label="Next slide"
+                      >
+                        <Image
+                          src={nextIcon}
+                          alt=""
+                          width={20}
+                          height={13}
+                          className="h-[13px] w-[20px]"
+                        />
+                      </button>
+                    )}
+                  </Card>
+                </div>
               </CarouselItem>
             );
           })}

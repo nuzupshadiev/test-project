@@ -59,10 +59,10 @@ export default function CommandInput() {
 
   return (
     <div className="flex min-w-0 flex-col items-center bg-[#050505] w-[555px] h-[192px]">
-      <div className="relative w-full min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.55)] backdrop-blur-md">
+      <div className="relative w-full h-full min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.55)] backdrop-blur-md">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-b from-white/20 to-transparent opacity-40" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-white/15 to-transparent opacity-30" />
-        <div className="flex min-w-0 flex-col gap-6 rounded-2xl rounded-b-[35px] border border-white/10 bg-linear-to-b from-white/10 to-white/5 p-5">
+        <div className="flex h-full min-w-0 flex-col justify-end gap-6 rounded-md rounded-b-[35px] border border-white/10 bg-linear-to-b from-white/10 to-white/5 p-5">
           <textarea
             ref={textareaRef}
             placeholder="Type something…"
