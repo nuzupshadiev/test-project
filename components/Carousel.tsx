@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -10,6 +11,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { SLIDES } from "@/data/heroSlides";
+import nextIcon from "@/data/next_icon.svg";
 
 export default function SlideScale() {
   const [api, setApi] = React.useState<CarouselApi | null>(null);
@@ -38,13 +40,17 @@ export default function SlideScale() {
 
     if (distance === 0) return 1;
     if (distance === 1) return 0.9;
-    return 0.75;
+    return 0.8;
   };
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <Carousel className="w-full" opts={{ loop: true }} setApi={setApi}>
-        <CarouselContent className="py-8">
+      <Carousel
+        className="w-full max-w-6xl"
+        opts={{ loop: true }}
+        setApi={setApi}
+      >
+        <CarouselContent className="py-8 items-center">
           {SLIDES.map((slide, index) => {
             const isActive = index === current;
 
@@ -52,30 +58,31 @@ export default function SlideScale() {
               <CarouselItem
                 key={slide.title}
                 className={cn(
-                  "basis-[72%] relative",
+                  "basis-[90%] md:basis-[75%] lg:basis-[65%] relative flex items-center justify-center",
                   isActive ? "z-10" : "z-0"
                 )}
               >
                 <Card
-                  className="relative aspect-16/10 transition-all duration-500 border-white/10 bg-zinc-900/60 backdrop-blur-xl p-0 m-0 gap-0"
+                  className="relative w-full aspect-video rounded-sm border border-white/10 shadow-none bg-zinc-900/60 backdrop-blur transition-[transform,opacity] duration-500 py-0 gap-0"
                   style={{
                     transform: `scale(${getScale(index)})`,
                     opacity: isActive ? 1 : 0.45,
-                    filter: isActive ? "brightness(1)" : "brightness(0.8)",
                   }}
                 >
-                  <CardContent className="relative h-full p-0 m-0 flex flex-col justify-between text-white rounded-2xl">
-                    <div className="p-8">
-                      <h3 className="text-2xl md:text-3xl font-medium tracking-tight text-zinc-200">
+                  <CardContent className="relative h-full p-0 m-0 text-white overflow-hidden">
+                    <div className="absolute top-5 left-5 w-[307px] h-[44px] font-['Geist'] text-[16px] leading-[1.4] font-normal tracking-normal text-[#B0B0B0]">
+                      <h3 className="">
                         {slide.title}
                       </h3>
-                      <p className="mt-2 text-sm md:text-base text-zinc-500">
+                      <p className="">
                         {slide.subtitle}
                       </p>
                     </div>
                     {slide.bottomRight && (
-                      <div className="absolute bottom-0 right-0 w-[60%] md:w-[55%] lg:w-[50%] max-w-[560px]">
-                        {slide.bottomRight}
+                      <div className="absolute bottom-0 right-0 w-[60%] max-w-[520px] translate-x-6 translate-y-6 rotate-[-8deg] origin-bottom-right">
+                        <div className="rounded-xl overflow-hidden shadow-2xl">
+                          {slide.bottomRight}
+                        </div>
                       </div>
                     )}
                   </CardContent>
@@ -83,11 +90,17 @@ export default function SlideScale() {
                   {isActive && (
                     <button
                       onClick={() => api?.scrollNext()}
-                      className="absolute right-[-28px] top-1/2 -translate-y-1/2 z-20 h-14 w-14 rounded-xl bg-white text-black shadow-xl flex items-center justify-center cursor-pointer transition-all hover:scale-105 hover:shadow-2xl active:scale-95"
+                      className="absolute right-[-20px] top-[33%] -translate-y-1/2 z-20 h-10 w-10 rounded-sm bg-white text-black shadow-md flex items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer"
                       type="button"
                       aria-label="Next slide"
                     >
-                      →
+                      <Image
+                        src={nextIcon}
+                        alt=""
+                        width={20}
+                        height={13}
+                        className="h-[13px] w-[20px]"
+                      />
                     </button>
                   )}
                 </Card>
@@ -97,16 +110,16 @@ export default function SlideScale() {
         </CarouselContent>
       </Carousel>
 
-      <div className="mt-4 flex justify-center gap-2">
+      <div className="mt-4 flex justify-center gap-[5px]">
         {SLIDES.map((_, index) => (
           <button
             key={index}
             onClick={() => api?.scrollTo(index)}
             className={cn(
-              "h-2 w-2 rounded-full transition-all cursor-pointer",
+              "h-1 w-1 rounded-full transition-all cursor-pointer bg-white/35",
               index === current
-                ? "bg-white scale-110"
-                : "bg-white/30 hover:bg-white/50"
+                ? "w-4 bg-white"
+                : "hover:bg-white/50"
             )}
             type="button"
             aria-label={`Go to slide ${index + 1}`}
