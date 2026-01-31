@@ -8,7 +8,7 @@ export default function Home() {
         <ModeSwitch />
         <CommandInput />
       </div>
-      <div className="flex flex-1 h-[598px] border-[0.5px] border-white/20 overflow-hidden">
+      <div className="flex flex-1 h-[598px] border-[0.5px] border-white/20 border-l-0 overflow-hidden">
         <MainPage />
       </div>
     </div>
