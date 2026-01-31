@@ -18,6 +18,16 @@ import {
 } from "@/components/ui/popover";
 import BubbleWithClose from "./bubble";
 
+const MENU_ITEMS = [
+  { icon: <Search size={18} />, label: "Deep Research" },
+  { icon: <ImageIcon size={18} />, label: "Create Image" },
+  { icon: <ImagePlus size={18} />, label: "Edit image" },
+  { icon: <Video size={18} />, label: "Create Video" },
+  { icon: <Music size={18} />, label: "Create Music" },
+  { icon: <Code size={18} />, label: "Write Code" },
+  { icon: <User size={18} />, label: "Characters" },
+];
+
 export default function CommandInput() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -26,16 +36,6 @@ export default function CommandInput() {
   const selectedItemsRef = useRef<HTMLDivElement | null>(null);
   const isDraggingRef = useRef(false);
   const lastClientXRef = useRef(0);
-  const dragDistanceRef = useRef(0);
-  const MENU_ITEMS = [
-    { icon: <Search size={18} />, label: "Deep Research" },
-    { icon: <ImageIcon size={18} />, label: "Create Image" },
-    { icon: <ImagePlus size={18} />, label: "Edit image" },
-    { icon: <Video size={18} />, label: "Create Video" },
-    { icon: <Music size={18} />, label: "Create Music" },
-    { icon: <Code size={18} />, label: "Write Code" },
-    { icon: <User size={18} />, label: "Characters" },
-  ];
   const availableItems = MENU_ITEMS.filter(
     (item) => !selectedItems.includes(item.label)
   );
@@ -168,7 +168,6 @@ export default function CommandInput() {
                   if (!container) return;
                   isDraggingRef.current = true;
                   lastClientXRef.current = event.clientX;
-                  dragDistanceRef.current = 0;
                   container.setPointerCapture(event.pointerId);
                 }}
                 onPointerMove={(event) => {
@@ -178,7 +177,6 @@ export default function CommandInput() {
                   const deltaX = event.clientX - lastClientXRef.current;
                   container.scrollLeft -= deltaX;
                   lastClientXRef.current = event.clientX;
-                  dragDistanceRef.current += Math.abs(deltaX);
                 }}
                 onPointerUp={(event) => {
                   if (selectedItems.length === 0) return;

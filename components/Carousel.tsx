@@ -81,17 +81,19 @@ export default function SlideScale() {
                       opacity: isActive ? 1 : 0.45,
                     }}
                   >
-                    <CardContent className="relative h-full p-0 m-0 text-white overflow-hidden">
-                    <div className="absolute top-5 left-5 w-[307px] h-[44px] font-['Geist'] text-[16px] leading-[1.4] font-normal tracking-normal text-[#B0B0B0]">
-                      <h3 className="">
-                        {slide.title}
-                      </h3>
-                      <p className="">
-                        {slide.subtitle}
-                      </p>
+                    <CardContent
+                      className="relative h-full p-0 m-0 text-white overflow-hidden backdrop-blur-[20px]"
+                      style={{
+                        boxShadow:
+                          "0px 19px 41px 0px #0000001A, 0px 75px 75px 0px #00000017, 0px 169px 101px 0px #0000000D, 0px 300px 120px 0px #00000003",
+                      }}
+                    >
+                    <div className="absolute top-5 left-5 w-[307px] h-[44px] font-['Geist'] text-[16px] leading-[1.4] font-normal tracking-[0] text-[#B0B0B0]">
+                      <h3>{slide.title}</h3>
+                      <p>{slide.subtitle}</p>
                     </div>
-                    {slide.bottomRight && (
-                      <div className="absolute bottom-0 right-0 w-[60%] max-w-[520px] translate-x-6 translate-y-6 rotate-[-8deg] origin-bottom-right">
+                      {slide.bottomRight && (
+                       <div className="absolute bottom-0 right-0 w-[92%] max-w-none translate-x-4 translate-y-4 rotate-[-8deg] origin-bottom-right sm:w-[80%] sm:max-w-[560px] sm:translate-x-6 sm:translate-y-6 md:w-[72%] md:max-w-[600px] md:translate-x-8 md:translate-y-8 lg:w-[65%] lg:max-w-[640px]">
                         <div className="rounded-xl overflow-hidden shadow-2xl">
                           {slide.bottomRight}
                         </div>
