@@ -21,10 +21,7 @@ export default function MainPage() {
         >
           LABS.
         </div>
-        <div
-          className="mt-3 font-mono font-normal text-[6px] leading-[1.2] tracking-normal uppercase text-zinc-400/70"
-          style={{ fontFamily: "Geist Mono" }}
-        >
+        <div className="mt-3 font-mono font-normal text-[6px] leading-[1.2] tracking-normal uppercase text-zinc-400/70">
           |DEEPSH| FLOW |||||
           <br />
           PREMIUM AI PRODUCT

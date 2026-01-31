@@ -8,28 +8,8 @@ export default function BubbleWithClose({
   label = "Bubble",
 }: BubbleWithCloseProps) {
   return (
-    <div
-      className="inline-flex items-center rounded-full p-[2px] select-none"
-      style={{
-        background: `conic-gradient(
-          from 270deg at 50% 50%,
-          #2C2C2C,
-          #3D3D3D 35deg,
-          #4F4F4F 80deg,
-          #454545 120deg,
-          #383838 170deg,
-          #2E2E2E 220deg,
-          #3C3C3C 290deg,
-          #2C2C2C 360deg
-        )`,
-      }}
-    >
-      <div
-        className="flex items-center gap-2 px-3 py-1.5 rounded-full"
-        style={{
-          background: "linear-gradient(180deg, #454545 0%, #3B3B3B 100%)",
-        }}
-      >
+    <div className="inline-flex items-center rounded-full p-[2px] select-none bg-[conic-gradient(from_270deg_at_50%_50%,#2C2C2C,#3D3D3D_35deg,#4F4F4F_80deg,#454545_120deg,#383838_170deg,#2E2E2E_220deg,#3C3C3C_290deg,#2C2C2C_360deg)]">
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[linear-gradient(180deg,#454545_0%,#3B3B3B_100%)]">
         <span className="text-sm text-[#B0B0B0] whitespace-nowrap">
           {label}
         </span>

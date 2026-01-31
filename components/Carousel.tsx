@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import GradientBox from "@/components/gradient";
+import gradientImage from "@/data/gradient.png";
 import {
   Carousel,
   type CarouselApi,
@@ -18,14 +18,16 @@ import { CloudIcon } from "lucide-react";
 export default function SlideScale() {
   const [api, setApi] = React.useState<CarouselApi | null>(null);
   const [current, setCurrent] = React.useState(0);
+  const totalSlides = SLIDES.length;
+
+  const updateCurrent = React.useCallback(() => {
+    if (!api) return;
+    const snap = api.selectedScrollSnap();
+    setCurrent(snap % totalSlides);
+  }, [api, totalSlides]);
 
   React.useEffect(() => {
     if (!api) return;
-
-    const updateCurrent = () => {
-      const snap = api.selectedScrollSnap();
-      setCurrent(snap % SLIDES.length);
-    };
 
     updateCurrent();
     api.on("select", updateCurrent);
@@ -33,17 +35,29 @@ export default function SlideScale() {
     return () => {
       api.off("select", updateCurrent);
     };
-  }, [api]);
+  }, [api, updateCurrent]);
 
-  const getScale = (index: number) => {
-    const total = SLIDES.length;
-    const diff = Math.abs(index - current);
-    const distance = Math.min(diff, total - diff);
+  const getScaleClasses = React.useCallback(
+    (index: number) => {
+      const diff = Math.abs(index - current);
+      const distance = Math.min(diff, totalSlides - diff);
 
-    if (distance === 0) return 1;
-    if (distance === 1) return 0.9;
-    return 0.8;
-  };
+      if (distance === 0) return "scale-100 opacity-100";
+      if (distance === 1) return "scale-90 opacity-[0.45]";
+      return "scale-[0.8] opacity-[0.45]";
+    },
+    [current, totalSlides]
+  );
+
+  const handleDotClick = React.useCallback(
+    (index: number) => api?.scrollTo(index),
+    [api]
+  );
+
+  const handleNextClick = React.useCallback(
+    () => api?.scrollNext(),
+    [api]
+  );
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
@@ -76,28 +90,33 @@ export default function SlideScale() {
               >
                 <div className="relative w-full">
                   <Card
-                    className="relative w-full aspect-video rounded-sm border border-white/10 shadow-none bg-zinc-900/60 backdrop-blur transition-[transform,opacity] duration-500 py-0 gap-0"
-                    style={{
-                      transform: `scale(${getScale(index)})`,
-                      opacity: isActive ? 1 : 0.45,
-                    }}
+                    className={cn(
+                      "relative w-full aspect-video rounded-sm border border-white/10 shadow-none bg-zinc-900/60 backdrop-blur transition-[transform,opacity] duration-500 py-0 gap-0",
+                      getScaleClasses(index)
+                    )}
                   >
                     <CardContent
-                      className="relative h-full p-0 m-0 text-white overflow-hidden backdrop-blur-[20px]"
-                      style={{
-                        boxShadow:
-                          "0px 19px 41px 0px #0000001A, 0px 75px 75px 0px #00000017, 0px 169px 101px 0px #0000000D, 0px 300px 120px 0px #00000003",
-                      }}
+                      className="relative h-full p-0 m-0 text-white overflow-hidden backdrop-blur-[20px] shadow-[0px_19px_41px_0px_#0000001A,0px_75px_75px_0px_#00000017,0px_169px_101px_0px_#0000000D,0px_300px_120px_0px_#00000003]"
                     >
                       <div className="absolute top-5 left-5 w-[307px] h-[44px] font-['Geist'] text-[16px] leading-[1.4] font-normal tracking-[0] text-[#B0B0B0]">
                         <h3>{slide.title}</h3>
                         <p>{slide.subtitle}</p>
                       </div>
                       {slide.bottomRight && (
-                        <div className="absolute bottom-0 right-0 w-[92%] max-w-none translate-x-4 translate-y-4 rotate-[-8deg] origin-bottom-right sm:w-[80%] sm:max-w-[560px] sm:translate-x-6 sm:translate-y-6 md:w-[72%] md:max-w-[600px] md:translate-x-8 md:translate-y-8 lg:w-[65%] lg:max-w-[640px]">
-                          <GradientBox className="absolute -inset-6 rounded-xl blur-3xl opacity-90 pointer-events-none" />
+                        <div className="absolute bottom-0 right-0 w-[120%] max-w-none translate-x-6 translate-y-6 rotate-[-8deg] origin-bottom-right sm:w-[120%] sm:translate-x-8 sm:translate-y-8 md:w-[120%] md:translate-x-10 md:translate-y-10 lg:w-[120%] lg:translate-x-12 lg:translate-y-12">
+                          {/* <GradientBox className="absolute -inset-6 rounded-xl blur-3xl opacity-90 pointer-events-none" /> */}
                           <div className="relative rounded-xl overflow-hidden shadow-2xl z-10">
-                            {slide.bottomRight}
+                            <Image
+                              src="/gradient.png"
+                              alt="Deepshi UI preview"
+                              width={900}
+                              height={560}
+                              className="h-auto w-full object-cover"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 95vw, 900px"
+                            />
+                            <div className="absolute bottom-0 right-0 z-10 w-[80%] max-w-[620px] translate-x-2 translate-y-2 sm:w-[75%] sm:translate-x-3 sm:translate-y-3 md:w-[72%] md:translate-x-4 md:translate-y-4">
+                              {slide.bottomRight}
+                            </div>
                           </div>
                         </div>
                       )}
@@ -105,7 +124,7 @@ export default function SlideScale() {
 
                     {isActive && (
                       <button
-                        onClick={() => api?.scrollNext()}
+                        onClick={handleNextClick}
                         className="absolute right-[-20px] top-[33%] -translate-y-1/2 z-20 h-10 w-10 rounded-sm bg-white text-black shadow-md flex items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer"
                         type="button"
                         aria-label="Next slide"
@@ -131,7 +150,7 @@ export default function SlideScale() {
         {SLIDES.map((_, index) => (
           <button
             key={index}
-            onClick={() => api?.scrollTo(index)}
+            onClick={() => handleDotClick(index)}
             className={cn(
               "h-1 w-1 rounded-full transition-all cursor-pointer bg-white/35",
               index === current ? "w-4 bg-white" : "hover:bg-white/50"

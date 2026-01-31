@@ -68,36 +68,7 @@ export default function CommandInput() {
 
   return (
     <div className="flex min-w-0 flex-col items-center w-[555px] min-h-[192px] h-auto">
-      <div
-        className="relative min-w-0 overflow-hidden w-full min-h-[192px] h-auto flex items-end justify-center"
-        style={{
-          paddingTop: "20px",
-          paddingBottom: "20px",
-          paddingLeft: "20px",
-          paddingRight: "20px",
-          top: "2px",
-          left: "0.5px",
-          opacity: 1,
-          borderRadius: "4.33px",
-          background: `linear-gradient(
-            to bottom,
-            rgba(74, 71, 76, 0.2) 2.15%,
-            rgba(149, 143, 152, 0.2) 4.31%,
-            rgba(197, 198, 201, 0.2) 6.62%,
-            rgba(85, 83, 86, 0.2) 10.16%,
-            rgba(32, 28, 31, 0.2) 17.16%,
-            rgba(49, 47, 50, 0.2) 42.1%,
-            rgba(37, 37, 37, 0.2) 68.25%,
-            rgba(37, 37, 37, 0.2) 82.17%,
-            rgba(37, 37, 37, 0.2) 87.35%,
-            rgba(255, 255, 255, 0.12) 93.31%,
-            rgba(37, 35, 36, 0.2) 96.01%,
-            rgba(0, 0, 0, 0.2) 100%
-          )`,
-          boxShadow: "0px 1px 0px 0px #FFFFFF1A inset",
-          transform: "none",
-        }}
-      >
+      <div className="relative min-w-0 overflow-hidden w-full min-h-[192px] h-auto flex items-end justify-center px-5 py-5 top-[2px] left-[0.5px] rounded-[4.33px] bg-[linear-gradient(to_bottom,rgba(74,71,76,0.2)_2.15%,rgba(149,143,152,0.2)_4.31%,rgba(197,198,201,0.2)_6.62%,rgba(85,83,86,0.2)_10.16%,rgba(32,28,31,0.2)_17.16%,rgba(49,47,50,0.2)_42.1%,rgba(37,37,37,0.2)_68.25%,rgba(37,37,37,0.2)_82.17%,rgba(37,37,37,0.2)_87.35%,rgba(255,255,255,0.12)_93.31%,rgba(37,35,36,0.2)_96.01%,rgba(0,0,0,0.2)_100%)] shadow-[inset_0px_1px_0px_0px_#FFFFFF1A]">
         <Image
           src={texture}
           alt=""
@@ -110,29 +81,7 @@ export default function CommandInput() {
         <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-12 bg-linear-to-b from-white/15 to-transparent opacity-30" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-12 bg-linear-to-t from-white/15 to-transparent opacity-30" />
 
-        <div
-          className="z-10 flex min-w-0 flex-col w-[496px]"
-          style={{
-            opacity: 1,
-            borderTopLeftRadius: "5px",
-            borderTopRightRadius: "5px",
-            borderBottomRightRadius: "35px",
-            borderBottomLeftRadius: "35px",
-            borderWidth: "0.5px",
-            borderStyle: "solid",
-            borderColor: "transparent",
-            padding: "20px",
-            gap: "14px",
-            background:
-              "linear-gradient(179.34deg, rgba(255, 255, 255, 0.18) 0.57%, rgba(255, 255, 255, 0.08) 154.9%)",
-            borderImageSource:
-              "linear-gradient(318.61deg, rgba(255, 255, 255, 0.1) 7.71%, rgba(255, 255, 255, 0.1) 29.6%), radial-gradient(50% 42.81% at 50% 0%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%)",
-            borderImageSlice: 1,
-            backdropFilter: "blur(3px)",
-            boxShadow:
-              "0px 19px 41px 0px #0000001A, 0px 75px 75px 0px #00000017, 0px 169px 101px 0px #0000000D, 0px 300px 120px 0px #00000003",
-          }}
-        >
+        <div className="z-10 flex min-w-0 flex-col w-[496px] opacity-100 rounded-tl-[5px] rounded-tr-[5px] rounded-br-[35px] rounded-bl-[35px] border-[0.5px] border-transparent p-5 gap-[14px] bg-[linear-gradient(179.34deg,rgba(255,255,255,0.18)_0.57%,rgba(255,255,255,0.08)_154.9%)] backdrop-blur-[3px] shadow-[0px_19px_41px_0px_#0000001A,0px_75px_75px_0px_#00000017,0px_169px_101px_0px_#0000000D,0px_300px_120px_0px_#00000003]">
           <textarea
             ref={textareaRef}
             placeholder="Type something…"
@@ -150,20 +99,7 @@ export default function CommandInput() {
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="w-[38.9922px] h-[38.9922px] rounded-full opacity-100 text-white hover:text-white shrink-0"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(44, 47, 52, 0.01) 0%, rgba(40, 43, 48, 0.01) 100%)",
-                      transform: "rotate(-90deg)",
-                      boxShadow: [
-                        "0px 0px 2.17px 0px #FFFFCE4D inset",
-                        "0px 0px 4.33px 0px #000000",
-                        "0px 0px 2.17px 0px #000000",
-                        "0px 2.17px 2.17px 0px #FFFFFF26",
-                        "0px 1.08px 0px 0px #000000A6",
-                        "0px -2.17px 2.17px 0px #00000040 inset",
-                      ].join(", "),
-                    }}
+                    className="w-[38.9922px] h-[38.9922px] rounded-full opacity-100 text-white hover:text-white shrink-0 bg-[linear-gradient(180deg,rgba(44,47,52,0.01)_0%,rgba(40,43,48,0.01)_100%)] -rotate-90 shadow-[inset_0px_0px_2.17px_0px_#FFFFCE4D,0px_0px_4.33px_0px_#000000,0px_0px_2.17px_0px_#000000,0px_2.17px_2.17px_0px_#FFFFFF26,0px_1.08px_0px_0px_#000000A6,inset_0px_-2.17px_2.17px_0px_#00000040]"
                   >
                     <svg
                       width="14"
@@ -295,23 +231,7 @@ export default function CommandInput() {
             <Button
               size="icon"
               variant="ghost"
-              className="w-[40px] h-[40px] p-[3px] rounded-full opacity-100 flex items-center justify-center shrink-0"
-              style={{
-                background: `conic-gradient(
-                  from 269.2deg at 50.98% 49.02%,
-                  #6E6E6E -40.23deg,
-                  #B9B9B9 22.97deg,
-                  #B9B9B9 40.14deg,
-                  #E1E1E1 86.68deg,
-                  #A5A5A5 132.2deg,
-                  #A5A5A5 152.97deg,
-                  #5E5E5E 193.94deg,
-                  #5C5C5C 221.15deg,
-                  #3F3F3F 257.95deg,
-                  #6E6E6E 319.77deg,
-                  #B9B9B9 382.97deg
-                )`,
-              }}
+              className="w-[40px] h-[40px] p-[3px] rounded-full opacity-100 flex items-center justify-center shrink-0 bg-[conic-gradient(from_269.2deg_at_50.98%_49.02%,#6E6E6E_-40.23deg,#B9B9B9_22.97deg,#B9B9B9_40.14deg,#E1E1E1_86.68deg,#A5A5A5_132.2deg,#A5A5A5_152.97deg,#5E5E5E_193.94deg,#5C5C5C_221.15deg,#3F3F3F_257.95deg,#6E6E6E_319.77deg,#B9B9B9_382.97deg)]"
               onClick={() => handleInputChange("")}
             >
               <div className="relative w-[40px] h-[40px] p-[3px] rounded-full bg-metal-conic flex items-center justify-center">

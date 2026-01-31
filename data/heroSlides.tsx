@@ -1,6 +1,19 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 
-export const slides = [
+export type HeroSlide = {
+  headline: string;
+  sub: string;
+  image: string;
+};
+
+export type CarouselSlide = {
+  title: string;
+  subtitle: string;
+  bottomRight?: ReactNode;
+};
+
+export const slides: HeroSlide[] = [
   {
     headline: "We Say What Other AI's Won't.",
     sub: "Your Private Uncensored Intelligence",
@@ -18,7 +31,13 @@ export const slides = [
   },
 ];
 
-export const MODES = ["Try Deepshi", "Try Deepshi Flow", "Try Deepshi Forge"];
+export const MODES = [
+  "Try Deepshi",
+  "Try Deepshi Flow",
+  "Try Deepshi Forge",
+] as const;
+
+export type Mode = (typeof MODES)[number];
 
 const previewImage = (
   <Image
@@ -31,7 +50,7 @@ const previewImage = (
   />
 );
 
-export const SLIDES = [
+export const SLIDES: CarouselSlide[] = [
   {
     title: "We Say What Other AI's Won't.",
     subtitle: "Your Private Uncensored Intelligence",

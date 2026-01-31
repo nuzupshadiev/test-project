@@ -4,10 +4,18 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import Image from "next/image";
 import subtractIcon from "@/data/Subtract.png";
-import { MODES } from "@/data/heroSlides";
+import { MODES, type Mode } from "@/data/heroSlides";
 
 export function ModeSwitch() {
-  const [stateMode, setStateMode] = useState("Try Deepshi");
+  const [activeMode, setActiveMode] = useState<Mode>(MODES[0]);
+
+  const getModeClasses = (mode: Mode) =>
+    cn(
+      "px-[15px] py-[10px] text-sm",
+      mode === activeMode
+        ? "bg-[#9775DE] text-white hover:bg-violet-400 rounded-full"
+        : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-50 rounded-xs"
+    );
 
   return (
     <div className="flex w-full min-w-0 items-center justify-between gap-2 rounded-[5px] bg-zinc-900 p-[8px] shadow-inner">
@@ -25,13 +33,8 @@ export function ModeSwitch() {
         {MODES.map((mode) => (
           <Button
             key={mode}
-            onClick={() => setStateMode(mode)}
-            className={cn(
-              "px-[15px] py-[10px] text-sm",
-              mode === stateMode
-                ? "bg-[#9775DE] text-white hover:bg-violet-400 rounded-full"
-                : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-50 rounded-xs"
-            )}
+            onClick={() => setActiveMode(mode)}
+            className={getModeClasses(mode)}
           >
             {mode}
           </Button>
