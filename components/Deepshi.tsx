@@ -1,27 +1,31 @@
+import Image from "next/image";
+import starIcon from "@/data/star.svg";
 import SlideScale from "./Carousel";
 
 export default function MainPage() {
   return (
-    <div className="flex p-[15px] relative w-full h-full">
+    <div className="flex p-3 md:p-[15px] relative w-full h-full">
       <div className="absolute text-white/40">
         <div className="flex flex-row">
           <div
-            className="border-[0.5px] border-white/20 rounded-xs px-[5px] text-base leading-[1.2] tracking-normal uppercase font-normal"
+            className="border-[0.5px] border-white/20 rounded-xs px-[5px] text-[10px] md:text-base leading-[1.2] tracking-normal uppercase font-normal"
           >
             EVERMIND
           </div>
-          <div
-            className="border-[0.5px] border-white/20 px-[5px] text-base leading-[1.2] tracking-normal uppercase font-normal rounded-full"
-          >
-            x
-          </div>
+          <Image
+            src={starIcon}
+            alt=""
+            width={34}
+            height={18}
+            className="h-[18px] w-[34px]"
+          />
         </div>
         <div
-          className="inline-block border-[0.5px] border-white/20 rounded-xs px-[5px] text-base leading-[1.2] tracking-normal uppercase font-normal rounded-tr-[12px]"
+          className="inline-block border-[0.5px] border-white/20 rounded-xs px-[5px] text-[10px] md:text-base leading-[1.2] tracking-normal uppercase font-normal rounded-tr-[12px]"
         >
           LABS.
         </div>
-        <div className="mt-3 font-mono font-normal text-[6px] leading-[1.2] tracking-normal uppercase text-zinc-400/70">
+        <div className="mt-3 font-mono font-normal text-[6px] md:text-[8px] leading-[1.2] tracking-normal uppercase text-zinc-400/70">
           |DEEPSH| FLOW |||||
           <br />
           PREMIUM AI PRODUCT

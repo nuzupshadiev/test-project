@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/carousel";
 import { SLIDES } from "@/data/heroSlides";
 import nextIcon from "@/data/next_icon.svg";
-import { CloudIcon } from "lucide-react";
+import poopIcon from "@/data/poop.svg";
 
 export default function SlideScale() {
   const [api, setApi] = React.useState<CarouselApi | null>(null);
@@ -43,8 +43,8 @@ export default function SlideScale() {
       const distance = Math.min(diff, totalSlides - diff);
 
       if (distance === 0) return "scale-100 opacity-100";
-      if (distance === 1) return "scale-90 opacity-[0.45]";
-      return "scale-[0.8] opacity-[0.45]";
+      if (distance === 1) return "scale-90 opacity-[0.75]";
+      return "scale-[0.8] opacity-[0.75]";
     },
     [current, totalSlides]
   );
@@ -54,10 +54,7 @@ export default function SlideScale() {
     [api]
   );
 
-  const handleNextClick = React.useCallback(
-    () => api?.scrollNext(),
-    [api]
-  );
+  const handleNextClick = React.useCallback(() => api?.scrollNext(), [api]);
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
@@ -69,7 +66,13 @@ export default function SlideScale() {
         <div className="pointer-events-none absolute left-1/2 top-0 z-20 -translate-x-1/2">
           <div className="flex items-center">
             <span className="flex h-[25px] w-[40px] items-center justify-center rounded-[25px] bg-[#9775DE] px-[8px] pt-[7px] pb-[8px] opacity-100">
-              <CloudIcon size={14} color="white" />
+              <Image
+                src={poopIcon}
+                alt=""
+                width={24}
+                height={14}
+                className="h-[14px] w-[24px]"
+              />
             </span>
             <span className="flex h-[25px] w-[84px] items-center justify-center rounded-[5px] bg-[#9775DE] px-[8px] pt-[3px] pb-[3px] text-xs font-medium uppercase text-white opacity-100">
               Deepshi
@@ -95,9 +98,7 @@ export default function SlideScale() {
                       getScaleClasses(index)
                     )}
                   >
-                    <CardContent
-                      className="relative h-full p-0 m-0 text-white overflow-hidden backdrop-blur-[20px] shadow-[0px_19px_41px_0px_#0000001A,0px_75px_75px_0px_#00000017,0px_169px_101px_0px_#0000000D,0px_300px_120px_0px_#00000003]"
-                    >
+                    <CardContent className="relative h-full p-0 m-0 text-white overflow-hidden backdrop-blur-[20px] shadow-[0px_19px_41px_0px_#0000001A,0px_75px_75px_0px_#00000017,0px_169px_101px_0px_#0000000D,0px_300px_120px_0px_#00000003]">
                       <div className="absolute top-5 left-5 w-[307px] h-[44px] font-['Geist'] text-[16px] leading-[1.4] font-normal tracking-[0] text-[#B0B0B0]">
                         <h3>{slide.title}</h3>
                         <p>{slide.subtitle}</p>

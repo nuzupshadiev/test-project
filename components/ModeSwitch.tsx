@@ -11,15 +11,15 @@ export function ModeSwitch() {
 
   const getModeClasses = (mode: Mode) =>
     cn(
-      "px-[15px] py-[10px] text-sm",
+      "px-2 py-1.5 text-xs md:px-[15px] md:py-[10px] md:text-sm",
       mode === activeMode
         ? "bg-[#9775DE] text-white hover:bg-violet-400 rounded-full"
         : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-50 rounded-xs"
     );
 
   return (
-    <div className="flex w-full min-w-0 items-center justify-between gap-2 rounded-[5px] bg-zinc-900 p-[8px] shadow-inner">
-      <div className="flex items-center justify-center rounded-full px-3 py-2">
+    <div className="flex w-full min-w-0 items-center justify-between gap-2 rounded-[5px] bg-zinc-900 p-2 md:p-[8px] shadow-inner">
+      <div className="flex items-center justify-center rounded-full px-2 py-1.5 md:px-3 md:py-2">
         <Image
           src={subtractIcon}
           alt="Subtract"

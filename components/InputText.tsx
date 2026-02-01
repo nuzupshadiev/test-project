@@ -67,8 +67,8 @@ export default function CommandInput() {
   }, [inputValue]);
 
   return (
-    <div className="flex min-w-0 flex-col items-center w-[555px] min-h-[192px] h-auto">
-      <div className="relative min-w-0 overflow-hidden w-full min-h-[192px] h-auto flex items-end justify-center px-5 py-5 top-[2px] left-[0.5px] rounded-[4.33px] bg-[linear-gradient(to_bottom,rgba(74,71,76,0.2)_2.15%,rgba(149,143,152,0.2)_4.31%,rgba(197,198,201,0.2)_6.62%,rgba(85,83,86,0.2)_10.16%,rgba(32,28,31,0.2)_17.16%,rgba(49,47,50,0.2)_42.1%,rgba(37,37,37,0.2)_68.25%,rgba(37,37,37,0.2)_82.17%,rgba(37,37,37,0.2)_87.35%,rgba(255,255,255,0.12)_93.31%,rgba(37,35,36,0.2)_96.01%,rgba(0,0,0,0.2)_100%)] shadow-[inset_0px_1px_0px_0px_#FFFFFF1A]">
+    <div className="flex min-w-0 flex-col items-center w-full md:max-w-[555px] min-h-[192px] h-auto">
+      <div className="relative min-w-0 overflow-hidden w-full min-h-[192px] h-auto flex items-end justify-center px-4 md:px-5 py-4 md:py-5 top-[2px] left-[0.5px] rounded-[4.33px] bg-[linear-gradient(to_bottom,rgba(74,71,76,0.2)_2.15%,rgba(149,143,152,0.2)_4.31%,rgba(197,198,201,0.2)_6.62%,rgba(85,83,86,0.2)_10.16%,rgba(32,28,31,0.2)_17.16%,rgba(49,47,50,0.2)_42.1%,rgba(37,37,37,0.2)_68.25%,rgba(37,37,37,0.2)_82.17%,rgba(37,37,37,0.2)_87.35%,rgba(255,255,255,0.12)_93.31%,rgba(37,35,36,0.2)_96.01%,rgba(0,0,0,0.2)_100%)] shadow-[inset_0px_1px_0px_0px_#FFFFFF1A]">
         <Image
           src={texture}
           alt=""
@@ -81,12 +81,12 @@ export default function CommandInput() {
         <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-12 bg-linear-to-b from-white/15 to-transparent opacity-30" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-12 bg-linear-to-t from-white/15 to-transparent opacity-30" />
 
-        <div className="z-10 flex min-w-0 flex-col w-[496px] opacity-100 rounded-tl-[5px] rounded-tr-[5px] rounded-br-[35px] rounded-bl-[35px] border-[0.5px] border-transparent p-5 gap-[14px] bg-[linear-gradient(179.34deg,rgba(255,255,255,0.18)_0.57%,rgba(255,255,255,0.08)_154.9%)] backdrop-blur-[3px] shadow-[0px_19px_41px_0px_#0000001A,0px_75px_75px_0px_#00000017,0px_169px_101px_0px_#0000000D,0px_300px_120px_0px_#00000003]">
+        <div className="z-10 flex min-w-0 flex-col w-full md:max-w-[496px] opacity-100 rounded-tl-[5px] rounded-tr-[5px] rounded-br-[35px] rounded-bl-[35px] border-[0.5px] border-transparent p-4 md:p-5 gap-3 md:gap-[14px] bg-[linear-gradient(179.34deg,rgba(255,255,255,0.18)_0.57%,rgba(255,255,255,0.08)_154.9%)] backdrop-blur-[3px] shadow-[0px_19px_41px_0px_#0000001A,0px_75px_75px_0px_#00000017,0px_169px_101px_0px_#0000000D,0px_300px_120px_0px_#00000003]">
           <textarea
             ref={textareaRef}
             placeholder="Type something…"
             rows={2}
-            className="w-full resize-none border-0 bg-transparent text-base leading-6 text-zinc-300 shadow-none placeholder:text-zinc-500 focus-visible:outline-none overflow-y-auto"
+            className="w-full resize-none border-0 bg-transparent text-sm md:text-base leading-6 text-zinc-300 shadow-none placeholder:text-zinc-500 focus-visible:outline-none overflow-y-auto"
             value={inputValue}
             onChange={(event) => handleInputChange(event.target.value)}
             onInput={(event) => adjustTextareaHeight(event.currentTarget)}
@@ -99,7 +99,7 @@ export default function CommandInput() {
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="w-[38.9922px] h-[38.9922px] rounded-full opacity-100 text-white hover:text-white shrink-0 bg-[linear-gradient(180deg,rgba(44,47,52,0.01)_0%,rgba(40,43,48,0.01)_100%)] -rotate-90 shadow-[inset_0px_0px_2.17px_0px_#FFFFCE4D,0px_0px_4.33px_0px_#000000,0px_0px_2.17px_0px_#000000,0px_2.17px_2.17px_0px_#FFFFFF26,0px_1.08px_0px_0px_#000000A6,inset_0px_-2.17px_2.17px_0px_#00000040]"
+                    className="w-[38.9922px] h-[38.9922px] rounded-full opacity-100 text-white hover:text-white hover:bg-transparent shrink-0 bg-[linear-gradient(180deg,rgba(44,47,52,0.01)_0%,rgba(40,43,48,0.01)_100%)] -rotate-90 shadow-[inset_0px_0px_2.17px_0px_#FFFFCE4D,0px_0px_4.33px_0px_#000000,0px_0px_2.17px_0px_#000000,0px_2.17px_2.17px_0px_#FFFFFF26,0px_1.08px_0px_0px_#000000A6,inset_0px_-2.17px_2.17px_0px_#00000040]"
                   >
                     <svg
                       width="14"
@@ -107,7 +107,7 @@ export default function CommandInput() {
                       viewBox="0 0 14 13.5"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="opacity-100"
+                      className={`opacity-100 transition-transform duration-200 ${isMenuOpen ? "rotate-45" : "rotate-0"}`}
                     >
                       <defs>
                         <linearGradient
@@ -143,13 +143,13 @@ export default function CommandInput() {
                       <Button
                         key={item.label}
                         variant="ghost"
-                        className="justify-start gap-3 text-sm text-zinc-200 hover:bg-white/10"
+                        className="justify-start gap-3 text-sm text-zinc-200 opacity-60 hover:opacity-100 hover:bg-white/10 hover:text-zinc-200"
                         onClick={() => {
                           setSelectedItems((prev) => [...prev, item.label]);
                           setIsMenuOpen(false);
                         }}
                       >
-                        <span className="text-zinc-300">{item.icon}</span>
+                        <span className="text-zinc-300 opacity-80">{item.icon}</span>
                         {item.label}
                       </Button>
                     ))}
