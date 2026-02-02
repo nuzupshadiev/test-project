@@ -14,7 +14,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import BubbleWithClose from "./Bubble";
+import BubbleWithClose from "./bubble";
 import texture from "@/data/texture.png";
 
 const MENU_ITEMS = [
